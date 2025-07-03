@@ -2,10 +2,12 @@ import UIKit
 
 let bankTransferProcessor = BankTransferProcessor()
 let creditCardProcessor = CreditCardProcessor()
+let cryptoProcessor = CryptoPaymentProcessor()
 let paymentSerice = LivePaymentService(
     processors: [
         creditCardProcessor,
-        bankTransferProcessor
+        bankTransferProcessor,
+        cryptoProcessor
     ]
 )
 
@@ -15,4 +17,10 @@ Task {
         processorType: .bankTransfer
     )
     print("Payment by bank transfer: \(result)")
+    
+    let cryptoResult = try await paymentSerice.makePayment(
+        amount: 50.0,
+        processorType: .crypto
+    )
+    print("Payment by crypto: \(cryptoResult)")
 }
