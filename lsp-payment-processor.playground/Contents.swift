@@ -2,7 +2,10 @@ import UIKit
 
 let bankTransferProcessor = BankTransferProcessor()
 let creditCardProcessor = CreditCardProcessor()
-let cryptoProcessor = CryptoPaymentProcessor()
+let cryptoProcessor = CryptoPaymentProcessor(
+    locationService: LiveLocationService(),
+    cryptoSupportChecker: LiveCryptoSupportChecker()
+)
 let paymentSerice = LivePaymentService(
     processors: [
         creditCardProcessor,
