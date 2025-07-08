@@ -27,3 +27,10 @@ public enum Country: String, Equatable, CaseIterable, Sendable {
     case other = "OTHER"
     // Add more countries as needed
 }
+
+public extension Optional where Wrapped == Country {
+    /// Returns the unwrapped country or `.other` if nil.
+    var orOther: Country {
+        self ?? .other
+    }
+}

@@ -6,11 +6,16 @@ let cryptoProcessor = CryptoPaymentProcessor(
     locationService: LiveLocationService(),
     cryptoSupportChecker: LiveCryptoSupportChecker()
 )
+let nextGenCryptoProcessor = NextGenCryptoPaymentsProcessor(
+    locationService: LiveLocationService(),
+    cryptoSupportChecker: LiveCryptoSupportChecker()
+)
 let paymentSerice = LivePaymentService(
     processors: [
         creditCardProcessor,
         bankTransferProcessor,
-        cryptoProcessor
+        cryptoProcessor,
+        nextGenCryptoProcessor
     ]
 )
 
@@ -26,4 +31,10 @@ Task {
         processorType: .crypto
     )
     print("Payment by crypto: \(cryptoResult)")
+    
+    let nextGenCryptoResult = try await paymentSerice.makePayment(
+        amount: 100.0,
+        processorType: .nextGenCrypto
+    )
+    print("Payment by next gen crypto: \(nextGenCryptoResult)")
 }

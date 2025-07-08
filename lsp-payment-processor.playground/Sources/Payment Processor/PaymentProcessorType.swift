@@ -10,4 +10,6 @@ public enum PaymentProcessorType: String, Equatable, CaseIterable, Sendable {
     case bankTransfer
     /// Cryptocurrency payment processor type.
     case crypto
+    /// Next Gen cryptocurrency payment processor type.
+    case nextGenCrypto
 }
